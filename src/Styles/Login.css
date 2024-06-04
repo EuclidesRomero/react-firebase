@@ -1,0 +1,14 @@
+.custom-height {
+    height: 600px; 
+    width: 100vh;
+  }
+
+  .img {
+    width: 1978px;
+    height: 600px;
+    object-fit: cover;
+  }
+
+  .container-p {
+    
+  }
