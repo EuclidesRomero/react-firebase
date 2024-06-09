@@ -1,6 +1,6 @@
 const Productos = () => {
   return (
-    <div>
+    <div className="bg bg-red-500">
       Desde productos
     </div>
   )

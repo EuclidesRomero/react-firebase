@@ -13,7 +13,7 @@ const Header = () => {
               <li className="text-1xl font-bold"><Link to="/">Inicio</Link></li>
               <li className="text-1xl font-bold"><Link to="/">About</Link></li>
               <li className="text-1xl font-bold"><Link to="/">Contacto</Link></li>
-              <li className="text-1xl font-bold"><Link to="/iniciar-sesion">Login</Link></li>
+              <li className="text-1xl font-bold"><Link to="/login">Login</Link></li>
             </ul>
           </nav>
         </div>

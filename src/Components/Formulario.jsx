@@ -1,10 +1,12 @@
 import { useState } from "react"
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
-import appFirebase from "../credenciales";
+import useAuth from "../hooks/useAuth"
 
-const auth = getAuth(appFirebase);
+
+
 
 const Formulario = () => {
+
+  const { createUser }  = useAuth();
   const [name, setnaName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPaswword1] = useState("")
@@ -15,10 +17,10 @@ const Formulario = () => {
     if([name, email, password, password2].includes("")){
       console.log('Todos los campos son obligatorios');
     } else if(password !== password2) {
-      console.log("Las contraseñas no coincideb")
+      console.log("Las contraseñas no coinciden")
     }
     else {
-      const response = await createUserWithEmailAndPassword(auth, email, password);
+      const response = await createUser(email, password);
       console.log(response);
     }
 

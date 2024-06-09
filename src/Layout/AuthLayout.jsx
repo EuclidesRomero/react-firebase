@@ -1,23 +1,26 @@
-import HeaderProtegido from '../Components/HeaderProtegido';
-import Footer from '../Components/Footer';
-import { Outlet, Navigate } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import { Navigate, Outlet } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import HeaderProtegido from "../Components/HeaderProtegido";
+import Footer from "../Components/Footer";
 
 const AuthLayout = () => {
-const {usuario} = useAuth();
-   return (
-        <>
-        {usuario ? (
-            <div>
-                <HeaderProtegido/>
-                 <div>
-                    <Outlet />
-                 </div>
-                <Footer />
-            </div>
-        ) : <Navigate to="/" />  }
-        </>
-    )
-}
+  const { loading, user } = useAuth();
 
-export default AuthLayout
+  if (loading) {
+    return <span className="loading loading-dots loading-lg"></span>;
+  }
+
+  if (user) {
+    return (
+      <>
+        <HeaderProtegido />
+          <Outlet/>
+        <Footer />
+      </>
+    );
+  }
+
+  return <Navigate to="/login" />;
+};
+
+export default AuthLayout;
