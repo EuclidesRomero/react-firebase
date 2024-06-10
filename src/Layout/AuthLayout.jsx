@@ -5,10 +5,7 @@ import Footer from "../Components/Footer";
 
 const AuthLayout = () => {
   const { loading, user } = useAuth();
-
-  if (loading) {
-    return <span className="loading loading-dots loading-lg"></span>;
-  }
+  if (loading) return <span className="loading loading-dots loading-lg"></span>;
 
   if (user) {
     return (

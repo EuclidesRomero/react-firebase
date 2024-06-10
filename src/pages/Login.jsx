@@ -4,11 +4,9 @@ import useAuth from "../hooks/useAuth";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const { loginUser } = useAuth();
 
   const functAuth = async (e) => {
-    
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
@@ -17,11 +15,10 @@ const Login = () => {
       console.log("Los campos no pueden estar vacíos");
     }
 
-    await loginUser(email, password)
+    loginUser(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        navigate("/products");
-        console.log(user);
+        navigate("/productos");
       })
       .catch((error) => {
         const errorMessage = error.message;
