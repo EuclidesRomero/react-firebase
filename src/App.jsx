@@ -1,21 +1,27 @@
 import './App.css'
-import Formulario from './Components/Formulario'
-import Home from './pages/Home'
-
-
+import HomePage from './Components/HomePage'
+import { AuthProvider } from './context/AuthProvider.jsx'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import LayoutPrincipal from './Layout/LayoutPrincipal.jsx'
+import Login from './pages/Login.jsx'
+import AuthLayout from './Layout/AuthLayout.jsx'
+import Productos from './pages/Productos.jsx'
 const App = () => {
-   return (
-    <>
-      <div className='flex justify-between mt-5'>
-        <div className='w-9/12'>
-         <Home />
-        </div>
-        <div className='w-2/6 h-85 mr-5 flex justify-center'>
-          <Formulario />
-        </div>
-      </div>
-  
-    </>
+  return (
+    <BrowserRouter>
+      <AuthProvider>      
+        <Routes>
+          <Route path='/' element ={<LayoutPrincipal/>}>
+            <Route index element ={ <HomePage />}/>
+            <Route path='login' element ={<Login />} />
+          </Route>
+          <Route path='/productos' element ={<AuthLayout />}>
+            <Route  index element = {<Productos />}/>
+          </Route>
+        </Routes>
+      </AuthProvider>
+    </BrowserRouter>
+
   )
 }
 
