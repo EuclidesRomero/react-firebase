@@ -10,9 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/roboto": "^5.0.13",
+    "@nextui-org/pagination": "^2.0.33",
+    "@nextui-org/system": "^2.2.2",
+    "@nextui-org/theme": "^2.2.6",
     "firebase": "^10.12.2",
+    "framer-motion": "^11.2.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^5.2.1",
+    "react-paginate": "^8.2.0",
     "react-router-dom": "^6.23.1"
   },
   "devDependencies": {

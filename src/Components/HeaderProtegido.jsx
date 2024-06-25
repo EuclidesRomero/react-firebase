@@ -11,8 +11,6 @@ const HeaderProtegido = () => {
       await logOut () ;
         console.log("Saliendo satisfactoriamente");
         navigate("/login")
-      
-      
     } catch (error) {
       console.log(error.message)
     }

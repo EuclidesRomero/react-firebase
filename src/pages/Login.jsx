@@ -4,33 +4,39 @@ import useAuth from "../hooks/useAuth";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { loginUser } = useAuth();
+  const { loginUser, setLoading} = useAuth();
 
-  const functAuth = async (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    if ([email, password].includes(" ")) {
+
+    if ([email, password].includes("")) {
       console.log("Los campos no pueden estar vacíos");
+
+    } else {
+      try {
+        await loginUser(email, password)
+        navigate("/productos");
+        setLoading(false);
+
+      } catch (error) {
+        const errorMessage = error.message;
+        console.error("Error al iniciar sesión:", errorMessage);
+      }
+
+
     }
 
-    loginUser(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        navigate("/productos");
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(errorMessage);
-      });
+
   };
   return (
     <div className="min-h-screen flex items-center justify-center -mt-48">
       <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-center text-2xl font-bold mb-10">Login</h2>
-        <div className="flex rounded-lg overflow-hidden">
-          <form className="w-2/5 flex flex-col p-8" onSubmit={functAuth}>
+        <div className="flex rounded-lg overflow-hidden" >
+          <form className="w-2/5 flex flex-col p-8" onSubmit={handleFormSubmit}>
             <div className="flex flex-col mb-4">
               <label htmlFor="email" className="text-center mb-2">
                 Correo electrónico
