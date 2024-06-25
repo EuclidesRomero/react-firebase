@@ -11,7 +11,7 @@ const Header = () => {
           <nav className="flex flex-row justify-center">
             <ul className="flex gap-10 mt-4">
               <li className="text-1xl font-bold"><Link to="/">Inicio</Link></li>
-              <li className="text-1xl font-bold"><Link to="/">About</Link></li>
+              <li className="text-1xl font-bold"><Link to="/about">About</Link></li>
               <li className="text-1xl font-bold"><Link to="/">Contacto</Link></li>
               <li className="text-1xl font-bold"><Link to="/login">Login</Link></li>
             </ul>
