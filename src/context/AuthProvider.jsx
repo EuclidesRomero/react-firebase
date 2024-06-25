@@ -30,7 +30,6 @@ const AuthProvider = ({ children }) => {
 
     const logOut = async () => {
         await signOut(auth);
-        setLoading(true);
     };
 
     useEffect(() => {
