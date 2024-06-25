@@ -6,6 +6,7 @@ import LayoutPrincipal from './Layout/LayoutPrincipal.jsx'
 import Login from './pages/Login.jsx'
 import AuthLayout from './Layout/AuthLayout.jsx'
 import Productos from './pages/Productos.jsx'
+import About from './pages/About.jsx'
 const App = () => {
   return (
     <BrowserRouter>
@@ -14,9 +15,10 @@ const App = () => {
           <Route path='/' element ={<LayoutPrincipal/>}>
             <Route index element ={ <HomePage />}/>
             <Route path='login' element ={<Login />} />
+            <Route path='about' element = {<About />}/>
           </Route>
           <Route path='/productos' element ={<AuthLayout />}>
-            <Route  index element = {<Productos />}/>
+            <Route index element = {<Productos />}/>
           </Route>
         </Routes>
       </AuthProvider>
