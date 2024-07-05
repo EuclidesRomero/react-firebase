@@ -27,14 +27,11 @@ const Login = () => {
       }
 
 
-    }
-
-
-  };
+    }};
   return (
-    <div className="min-h-screen flex items-center justify-center -mt-48">
+    <div className="min-h-screen flex items-center justify-center -mt-16 ">
       <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-center text-2xl font-bold mb-10">Login</h2>
+        <h2 className="text-center text-2xl font-bold mb-10">Inicia sesión para ver nuestros productos</h2>
         <div className="flex rounded-lg overflow-hidden" >
           <form className="w-2/5 flex flex-col p-8" onSubmit={handleFormSubmit}>
             <div className="flex flex-col mb-4">
@@ -76,7 +73,7 @@ const Login = () => {
           </form>
           <div className="bg-blue-600 w-3/5">
             <img
-              src="../../public/img/background3.jpg"
+              src="../../public/img/backgroundopt2.jpg"
               alt="Background"
               className="h-full w-full object-cover"
             />

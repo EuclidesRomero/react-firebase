@@ -35,7 +35,7 @@ const Pagination = ({setCurrentPage,currentPage, page, nPges}) => {
         }
         onPageChange={handlePageClick}
         pageRangeDisplayed={2}
-        pageCount={8}
+        pageCount={16}
         previousLabel={
         <span className="w-10 h-10 flex items-center justify- bg-gray-100 rounded-md mr-4">
           <BsChevronLeft />

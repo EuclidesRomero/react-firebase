@@ -1,60 +1,93 @@
-import useAuth from '../hooks/useAuth';
-import { useState } from 'react';
-import Pagination from '../Components/Pagination';
+import useAuth from "../hooks/useAuth";
+import useCart from "../hooks/useCart";
+import useFavorites from "../hooks/useFavorites";
 
-export default function RecipeReviewCard() {
-  const { productos, loading } = useAuth();
-  const [dataQt, setDataQt] = useState(8);
-  const [currentPage, setCurrentPage] = useState(1); 
+import { useState } from "react";
+import Pagination from "../Components/Pagination";
+import { formatearDinero } from "../Helpers/helpers";
+import { AddAtoCart, RemoveFavorites, RemoveCart, Favorite } from "../Components/Icons";
+
+const Productos = () => {
+  const { productos } = useAuth();
+  const { cart, addToCart, removeFromCart, creckProductInCart } = useCart();
+  const { addFavorites, favoritos, deleteFavorite, checkProductInFavorites } = useFavorites();
+  const [dataQt, setDataQt] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
   const indexFin = currentPage * dataQt;
   const indexIni = indexFin - dataQt;
   const data = productos.slice(indexIni, indexFin);
   const nPges = Math.ceil(productos.length / dataQt);
- 
 
+  console.log(favoritos);
 
   return (
     <>
-    <div className='grid grid-cols-4 gap-3 '>
-      {data.map((data) => (
-        <div key={data.id} className="max-w-xs rounded overflow-hidden shadow-lg bg-white mb-4 ">
-          <img src={data.img} alt={data.name} className="w-full" />
-          <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">{data.name}</div>
-            <p className="text-gray-700 text-base">
-              {data.description}
-            </p>
+      <div className="bg-gray-100 py-8">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {data.length ? (
+              data.map((producto) => {
+                const isProductInCart = creckProductInCart(producto);
+                const isProductInFavorite = checkProductInFavorites(producto);
+                return (
+                  <div
+                    key={producto.id}
+                    className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                  >
+                    <div className="p-4">
+                      <h2 className="text-center mb-2 font-bold text-lg">{producto.name}</h2>
+                      <div className="flex justify-center">
+                        <img
+                          className="w-56 object-cover rounded-lg"
+                          src={producto.img}
+                          alt={producto.name}
+                        />
+                      </div>
+                      <div className="mt-4 text-gray-600">{producto.description}</div>
+                      <div className="flex justify-around mt-4">
+                        <button
+                          onClick={() => !isProductInCart ? addToCart(producto) : removeFromCart(producto)}
+                          className={`flex items-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300 ${
+                            isProductInCart ? 'bg-red-500 hover:bg-red-700' : ''
+                          }`}
+                        >
+                          {isProductInCart ? <RemoveCart /> : <AddAtoCart />}
+                        </button>
+                        <button
+                          onClick={() => !isProductInFavorite ? addFavorites(producto) : deleteFavorite(producto)}
+                          className="flex items-center justify-center bg-gray-200 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded transition-colors duration-300"
+                        >
+                          {!isProductInFavorite ? <RemoveFavorites /> : <Favorite />}
+                        </button>
+                      </div>
+                      <div className="mt-4 flex justify-center">
+                        <span className="inline-block bg-gray-200 rounded-full px-2 py-1 font-semibold text-green-600 text-2xl">
+                          {formatearDinero(producto.price)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <p className="col-span-3 text-center text-gray-500">Cargando productos...</p>
+            )}
           </div>
-          <div className="px-6 py-4 flex justify-between">
-            <span className="inline-block bg-gray-200 rounded-full px-2 py-1 font-semibold text-green-600 mr-2 text-2xl">${data.price}</span>
-            <button className="bg-gray-200 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart-up">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                <path d="M12.5 17h-6.5v-14h-2" />
-                <path d="M6 5l14 1l-.854 5.977m-2.646 1.023h-10.5" />
-                <path d="M19 22v-6" />
-                <path d="M22 19l-3 -3l-3 3" />
-              </svg>
-            </button>
-            <button className="bg-gray-200 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d31212" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-heart">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-              </svg>
-            </button>
+          <div className="mt-8 flex justify-center">
+            {data.length === 0 ? (
+              <span className="col-span-4 flex justify-center">...</span>
+            ) : (
+              <Pagination
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+                nPges={nPges}
+              />
+            )}
           </div>
         </div>
-      ))}
-    </div>
-    <div> { loading ? <span>Cargando ...</span>:
-        <Pagination 
-        setCurrentPage={setCurrentPage} 
-        currentPage={currentPage}
-        nPges= {nPges} />
-        } 
-        </div> 
+      </div>
     </>
-    
   );
-}
+};
+
+export default Productos;
