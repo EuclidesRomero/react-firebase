@@ -13,7 +13,15 @@ const AuthProvider = ({ children }) => {
     const [usuario, setUsuario] = useState(null);
     const [loading, setLoading] = useState(true);
     const [productos, setProductos] = useState([])
+    const [alerta, setAlerta] = useState({});
 
+
+    const mostrarAlerta = (alerta) => {
+        setAlerta(alerta);
+        setTimeout(() => {
+          setAlerta({});
+        }, 5000);
+      };
 
     const createUser = (email, password) => {
         setLoading(true);
@@ -69,7 +77,7 @@ const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ usuario, createUser, loginUser, logOut, loading, setLoading, productos }}>
+        <AuthContext.Provider value={{ usuario, createUser, loginUser, logOut, loading, setLoading, productos, mostrarAlerta, alerta}}>
             {children}
         </AuthContext.Provider>
     )

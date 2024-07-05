@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
+import Alerta from "../Components/Alerta";
 import "../../src/Styles/Login.css";
 import useAuth from "../hooks/useAuth";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { loginUser, setLoading} = useAuth();
+  const { loginUser, setLoading,  mostrarAlerta, alerta } = useAuth();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -13,7 +14,11 @@ const Login = () => {
 
 
     if ([email, password].includes("")) {
-      console.log("Los campos no pueden estar vacíos");
+      mostrarAlerta({
+        msg: 'Todos los campos son obligatorios',
+        error: true
+      });
+      return;
 
     } else {
       try {
@@ -23,14 +28,17 @@ const Login = () => {
 
       } catch (error) {
         const errorMessage = error.message;
-        console.error("Error al iniciar sesión:", errorMessage);
+        mostrarAlerta({
+        msg: errorMessage,
+        error: true,
+      });
       }
-
-
     }};
+  const { msg } = alerta;
   return (
     <div className="min-h-screen flex items-center justify-center -mt-16 ">
       <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
+      {msg && <Alerta alerta={alerta} />}
         <h2 className="text-center text-2xl font-bold mb-10">Inicia sesión para ver nuestros productos</h2>
         <div className="flex rounded-lg overflow-hidden" >
           <form className="w-2/5 flex flex-col p-8" onSubmit={handleFormSubmit}>
@@ -57,7 +65,7 @@ const Login = () => {
             <input
               className="cursor-pointer bg-black text-white w-60 rounded-lg self-center mt-3 p-2"
               type="submit"
-              value="Login"
+              value="Ingresar"
             />
             <div className="flex justify-center h-full">
               <div className="flex justify-center items-end">
