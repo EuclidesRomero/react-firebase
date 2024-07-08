@@ -7,9 +7,9 @@ const Favoritos = () => {
 
   return (
     <>
-      <h1 className="text-center text-3xl font-bold mb-4">Tus Favoritos</h1>
-      <div className="flex flex-col items-center">
-        <p className="mb-4">Estos son tus productos favoritos</p>
+      <h1 className="text-center text-3xl font-bold mb-4 mt-40">Tus Favoritos</h1>
+      <div className="flex flex-col items-center mt-20">
+      
         <div className=" w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4">
           {favoritos.length === 0 ? (
             <span className="col-span-full text-center">Aún no hay nada en favoritos</span>

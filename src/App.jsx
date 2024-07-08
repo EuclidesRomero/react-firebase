@@ -1,5 +1,4 @@
 import './App.css'
-
 import HomePage from './Components/HomePage'
 import { AuthProvider } from './context/AuthProvider.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -13,6 +12,8 @@ import { CarritoProvider } from './context/CarritoProvider.jsx'
 import Favoritos from './pages/Favoritos.jsx'
 import FavoritoProvider from './context/FavoritoProvider.jsx'
 import Contacto from './pages/Contacto.jsx'
+
+
 const App = () => {
   return (
     <BrowserRouter>

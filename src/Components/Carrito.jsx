@@ -14,13 +14,13 @@ const Carrito = () => {
       </label>
       <input id={cartCeckBoxId} type="checkbox" hidden />
       <aside className="cart">
-        <p className="text-black block mt-10 mb-5 font-bold text-center">
+        <div className="text-black block mt-10 mb-5 font-bold text-center">
           {cart.length === 0 ? (
             <h3 className="font-bold text-2xl">No hay nada en el carrito</h3>
           ) : (
             <h3 className="font-bold text-2xl">Este es tu carrito</h3>
           )}
-        </p>
+        </div>
         {cart.map((producto) => (
           <div key={producto.id} className="cart-item flex items-center p-4 border-b border-gray-200">
             <img

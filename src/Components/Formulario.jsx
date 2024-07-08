@@ -1,9 +1,11 @@
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
-import Alerta from "./Alerta";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const Formulario = () => {
-  const { createUser, mostrarAlerta, alerta } = useAuth();
+  const { createUser} = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword1] = useState("");
@@ -12,17 +14,22 @@ const Formulario = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if ([name, email, password, password2].includes("")) {
-      mostrarAlerta({
-        msg: 'Todos los campos son obligatorios',
-        error: true
+      toast.error("Los campos no pueden estar vacios", {
+        position: "top-center",
+        style: {
+          width:'400px',
+        }
       });
       return;
       
     } else if (password !== password2) {
-      mostrarAlerta({
-        msg: 'Las contraseñas deben ser iguales',
-        error: true
-      });
+      toast.error('Las contraseñas no coinciden',{
+        position: "top-right",
+        style: {
+          width:'400px',
+        }
+  
+       })
       return;
 
     } else {
@@ -31,26 +38,29 @@ const Formulario = () => {
       setEmail("");
       setPassword1("");
       setPassword2("");
-      mostrarAlerta({
-        msg: 'El usuario fue creado con éxito',
-        error: false
-      });
+      toast.success('usuario registrado de manera exitosa',{
+        position: "top-center",
+        style: {
+          width:'400px',
+        }
+  
+       })
      
     }
   };
 
-  const { msg } = alerta;
+
 
   return (
     <form className="ml-5 flex flex-col justify-center w-2/3" onSubmit={handleSubmit}>
-      {msg && <Alerta alerta={alerta} />}
       <h2 className="text-2xl mb-4 font-bold text-center">Regístrate</h2>
+        <ToastContainer />
       <div className="flex flex-col space-y-4">
         <label className="text-center">Nombre</label>
         <input
           type="text"
           placeholder=""
-          className="p-2 border border-gray-300 rounded-lg text-center"
+          className="p-2 border border-gray-300 rounded-lg "
           value={name}
           onChange={(e) => setName(e.target.value)}
         />

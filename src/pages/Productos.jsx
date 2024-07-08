@@ -6,6 +6,7 @@ import { useState } from "react";
 import Pagination from "../Components/Pagination";
 import { formatearDinero } from "../Helpers/helpers";
 import { AddAtoCart, RemoveFavorites, RemoveCart, Favorite } from "../Components/Icons";
+import { ToastContainer } from "react-toastify";
 
 const Productos = () => {
   const { productos } = useAuth();
@@ -22,6 +23,7 @@ const Productos = () => {
 
   return (
     <>
+    <ToastContainer />
       <div className="bg-gray-100 py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -33,7 +35,7 @@ const Productos = () => {
                   <div
                     key={producto.id}
                     className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
-                  >
+                  > 
                     <div className="p-4">
                       <h2 className="text-center mb-2 font-bold text-lg">{producto.name}</h2>
                       <div className="flex justify-center">

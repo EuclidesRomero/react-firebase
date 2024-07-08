@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import Alerta from "../Components/Alerta";
 import "../../src/Styles/Login.css";
+import 'react-toastify/dist/ReactToastify.css';
 import useAuth from "../hooks/useAuth";
+import { ToastContainer, toast } from "react-toastify";
+
 
 const Login = () => {
   const navigate = useNavigate();
-  const { loginUser, setLoading,  mostrarAlerta, alerta } = useAuth();
+  const { loginUser, setLoading } = useAuth();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -14,10 +16,13 @@ const Login = () => {
 
 
     if ([email, password].includes("")) {
-      mostrarAlerta({
-        msg: 'Todos los campos son obligatorios',
-        error: true
+      toast.error("Los campos no pueden estar vacios", {
+        position: "top-center",
+        style: {
+          width:'400px',
+        }
       });
+    
       return;
 
     } else {
@@ -28,17 +33,19 @@ const Login = () => {
 
       } catch (error) {
         const errorMessage = error.message;
-        mostrarAlerta({
-        msg: errorMessage,
-        error: true,
-      });
+        toast.error(errorMessage, {
+          position: "top-right",
+          style: {
+            width:'400px',
+          }
+        });
       }
     }};
-  const { msg } = alerta;
   return (
     <div className="min-h-screen flex items-center justify-center -mt-16 ">
       <div className="w-full max-w-4xl bg-white p-8 rounded-lg shadow-lg">
-      {msg && <Alerta alerta={alerta} />}
+    {/*   {msg && <Alerta alerta={alerta} />} */}
+        <ToastContainer />
         <h2 className="text-center text-2xl font-bold mb-10">Inicia sesión para ver nuestros productos</h2>
         <div className="flex rounded-lg overflow-hidden" >
           <form className="w-2/5 flex flex-col p-8" onSubmit={handleFormSubmit}>
