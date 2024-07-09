@@ -5,7 +5,7 @@ html, body {
   
 
 .background-img {
-    background-image: url('../public/Img/backgroundopt3.jpg');
+    background-image: url('/img/backgroundopt3.jpg');
     background-size: cover; 
     background-position: center; 
     height: 100vh; 
@@ -14,9 +14,29 @@ html, body {
     
 
 }
+@media (max-width: 640px) {
+    .background-img {
+        background-size: cover; 
+        height: 50vh;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+    .background-img {
+        background-size: cover;
+        height: 75vh; 
+    }
+}
+
+@media (min-width: 769px) {
+    .background-img {
+        background-size: cover; 
+        height: 100vh; 
+    }
+}
 
 .bg-banner-img {
-    background-image: url('../public/Img/banner-artesano_Mesa-de-trabajo-2.jpg');
+    background-image: url('/img/banner-artesano_Mesa-de-trabajo-2.jpg');
     background-size: cover;
     background-position: center;
     object-fit: cover;
@@ -25,7 +45,7 @@ html, body {
 }
 
 .logo-img {
-    background-image: url('../public/Img/Logo.jpg');
+    background-image: url('/img/Logo.jpg');
     background-size: cover;
     background-position: center;
     height: auto;
@@ -38,7 +58,8 @@ html, body {
 	left: 0; 
 	top: 0; 
 	position: fixed; 
-    height: 115px;
+    height: 122px;
+    margin-bottom: 20px;
 }
 
 

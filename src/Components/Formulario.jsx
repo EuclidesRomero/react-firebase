@@ -52,8 +52,8 @@ const Formulario = () => {
 
 
   return (
-    <form className="ml-5 flex flex-col justify-center w-2/3" onSubmit={handleSubmit}>
-      <h2 className="text-2xl mb-4 font-bold text-center">Regístrate</h2>
+    <form className=" flex flex-col justify-center w-full  mt-16" onSubmit={handleSubmit}>
+      <h2 className="lg:text-2xl md:text-1xl mb-4 font-bold text-center">Regístrate</h2>
         <ToastContainer />
       <div className="flex flex-col space-y-4">
         <label className="text-center">Nombre</label>

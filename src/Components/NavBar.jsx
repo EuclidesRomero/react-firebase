@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { LogOut, MenuIcon, CloseIcon } from "./Icons.jsx";  // Asegúrate de tener estos íconos
+import { LogOut, MenuIcon, CloseIcon } from "./Icons.jsx"; 
 import useAuth from '../hooks/useAuth.jsx';
 import Carrito from "./Carrito.jsx";
 import "../../src/Styles/Cart.css";
